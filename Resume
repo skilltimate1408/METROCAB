@@ -1,0 +1,50 @@
+import streamlit as st
+
+st.set_page_config(page_title="Student Resume Builder")
+
+st.title("🎓 Student Resume Builder")
+
+# Sidebar for input
+st.sidebar.header("Enter Your Details")
+
+name = st.sidebar.text_input("Full Name")
+email = st.sidebar.text_input("Email")
+phone = st.sidebar.text_input("Phone Number")
+
+education = st.sidebar.text_area("Education Details")
+skills = st.sidebar.text_area("Skills (comma separated)")
+projects = st.sidebar.text_area("Projects")
+
+photo = st.sidebar.file_uploader("Upload Profile Photo", type=["jpg", "png"])
+
+# Display Resume
+st.header("📄 Resume Preview")
+
+if name:
+    col1, col2 = st.columns([1, 3])
+
+    with col1:
+        if photo:
+            st.image(photo, width=120)
+
+    with col2:
+        st.subheader(name)
+        st.write(f"📧 {email}")
+        st.write(f"📞 {phone}")
+
+    st.markdown("---")
+
+    st.subheader("🎓 Education")
+    st.write(education)
+
+    st.subheader("💡 Skills")
+    if skills:
+        skill_list = skills.split(",")
+        for skill in skill_list:
+            st.write(f"✔️ {skill.strip()}")
+
+    st.subheader("🚀 Projects")
+    st.write(projects)
+
+else:
+    st.info("Please enter your details in the sidebar.")
