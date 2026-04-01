@@ -1,0 +1,28 @@
+from tkinter import *
+import random
+a=Tk()
+a.configure(bg="lightblue")
+lb1=Label(a, text="Friendship Calculator 💖",
+                 font=("Arial", 16, "bold"), bg="lightblue")
+lb1.grid(column=1,row=0)
+lb2=Label(a, text="Your Name:", bg="lightblue")
+lb2.grid(column=0,row=1)
+lb3=Label(a, text="Friend's Name:", bg="lightblue")
+lb3.grid(column=0,row=2)
+e1=Entry(a,width=15)
+e1.grid(column=1,row=1)
+e2=Entry(a,width=15)
+e2.grid(column=1,row=2)
+lb=Label(a,text="",bg="lightblue",fg="red",font=("Arial", 16, "bold"))
+lb.grid(column=1,row=4)
+def check():
+    n1=e1.get()
+    n2=e2.get()
+    r=random.randint(90, 100)
+    lb.config(text="Friendship between "+n1+ " and " +n2+ " :  " +str(r)+" %")
+    
+b=Button(a,text="Calculate 💫",command=check)
+b.grid(column=1,row=3)
+
+
+a.mainloop()
