@@ -1,0 +1,44 @@
+import streamlit as st
+st.title("🍽️ Restaurant Bill Generator")
+# Menu with prices
+menu = {
+    "Pizza": 200,
+    "Burger": 120,
+    "Pasta": 150,
+    "Sandwich": 100,
+    "Coffee": 80
+}
+st.header("Select Items")
+total = 0
+bill_details = []
+
+# Loop through menu
+for item, price in menu.items():
+    col1, col2 = st.columns(2)
+
+    with col1:
+        selected = st.checkbox(f"{item} - ₹{price}")
+
+    with col2:
+        quantity = st.number_input(f"Qty for {item}", min_value=0, step=1, key=item)
+
+    if selected and quantity > 0:
+        item_total = price * quantity
+        total += item_total
+        bill_details.append((item,
+quantity, item_total))
+
+# Show Bill
+st.header(" Bill Summary")
+
+if bill_details:
+    for item, qty, cost in bill_details:
+        st.write(f"{item} x {qty} = ₹{cost}")
+
+    st.subheader(f"Total Amount: ₹{total}")
+else:
+    st.write("No items selected")
+
+if total > 0:
+
+    st.success(f"Final Amount to Pay: ₹{total}")
